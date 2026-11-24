@@ -1,0 +1,13 @@
+# Build Maven
+target/
+*.class
+*.jar
+
+# File struk hasil running lokal
+receipts/
+Nota_Pemeriksaan_*.txt
+
+# File sementara IDE
+.idea/
+*.iml
+.DS_Store

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<BorderPane prefHeight="740.0" prefWidth="1120.0" 
+            stylesheets="@../css/style.css"
+            xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.klinik.app.controller.MainController">
+   <top>
+      <HBox alignment="CENTER_LEFT" spacing="16.0" styleClass="top-navbar" BorderPane.alignment="CENTER">
+         <children>
+            <!-- Brand & Clinic Info -->
+            <HBox alignment="CENTER_LEFT" spacing="10.0">
+               <Label text="🏥" style="-fx-font-size: 24px;" />
+               <VBox alignment="CENTER_LEFT" spacing="2.0">
+                  <Label text="MYCLINIC" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: white;" />
+                  <Label text="Sistem Informasi Pelayanan Medis Terpadu" style="-fx-font-size: 11px; -fx-text-fill: #94a3b8;" />
+               </VBox>
+            </HBox>
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <!-- Active User Profile Card -->
+            <HBox alignment="CENTER" spacing="12.0" style="-fx-background-color: rgba(255,255,255,0.08); -fx-padding: 6 14; -fx-background-radius: 8;">
+               <Label text="👤" style="-fx-font-size: 18px;" />
+               <VBox alignment="CENTER_LEFT" spacing="2.0">
+                  <HBox alignment="CENTER_LEFT" spacing="8.0">
+                     <Label fx:id="lblCurrentUserName" text="Nama Pengguna" style="-fx-font-weight: bold; -fx-text-fill: white; -fx-font-size: 13px;" />
+                     <Label fx:id="lblCurrentUserRole" text="ROLE" styleClass="badge, badge-primary" />
+                  </HBox>
+                  <Label fx:id="lblCurrentUserSub" text="Informasi Tambahan" style="-fx-font-size: 11px; -fx-text-fill: #cbd5e1;" />
+               </VBox>
+            </HBox>
+
+            <!-- Logout Button -->
+            <Button text="Keluar" onAction="#handleLogout" styleClass="btn-danger" style="-fx-font-size: 12px; -fx-padding: 6 14;">
+               <HBox.margin>
+                  <Insets left="6.0" />
+               </HBox.margin>
+            </Button>
+         </children>
+      </HBox>
+   </top>
+   <center>
+      <TabPane fx:id="mainTabPane" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+        <tabs>
+          <Tab fx:id="tabAntrean" text="Antrean Pasien &amp; Triase">
+             <content><fx:include source="AntreanView.fxml"/></content>
+          </Tab>
+          <Tab fx:id="tabRekamMedis" text="Pemeriksaan &amp; Rekam Medis">
+             <content><fx:include source="RekamMedisView.fxml"/></content>
+          </Tab>
+          <Tab fx:id="tabPasien" text="Data Pasien">
+             <content><fx:include source="PasienView.fxml"/></content>
+          </Tab>
+          <Tab fx:id="tabObat" text="Katalog &amp; Stok Obat">
+             <content><fx:include source="ObatView.fxml"/></content>
+          </Tab>
+          <Tab fx:id="tabPegawai" text="Kelola Pegawai &amp; Dokter">
+             <content><fx:include source="PegawaiView.fxml"/></content>
+          </Tab>
+        </tabs>
+      </TabPane>
+   </center>
+</BorderPane>

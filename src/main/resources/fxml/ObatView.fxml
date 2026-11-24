@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="14.0" style="-fx-background-color: #f8fafc;" 
+      stylesheets="@../css/style.css"
+      xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" 
+      fx:controller="com.klinik.app.controller.ObatController">
+    <padding>
+        <Insets top="16.0" right="20.0" bottom="16.0" left="20.0"/>
+    </padding>
+
+    <!-- Header Section -->
+    <HBox alignment="CENTER_LEFT" spacing="12.0">
+        <VBox spacing="2.0">
+            <Label text="Katalog &amp; Stok Obat" styleClass="title-page"/>
+            <Label text="Inventaris persediaan obat-obatan, kategori, dan pemantauan tanggal kedaluwarsa" styleClass="text-muted"/>
+        </VBox>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="lblInfoRole" text="" styleClass="badge, badge-kuning" visible="false"/>
+    </HBox>
+
+    <!-- Form Input Card (Admin Only) -->
+    <VBox spacing="12.0" styleClass="card">
+        <Label text="Formulir Inventaris Obat" styleClass="title-section"/>
+
+        <GridPane hgap="14.0" vgap="10.0">
+            <columnConstraints>
+                <ColumnConstraints minWidth="90.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="180.0"/>
+                <ColumnConstraints minWidth="90.0" prefWidth="100.0"/>
+                <ColumnConstraints hgrow="ALWAYS" minWidth="180.0"/>
+            </columnConstraints>
+
+            <children>
+                <Label text="Nama Obat:" styleClass="text-label" GridPane.columnIndex="0" GridPane.rowIndex="0"/>
+                <TextField fx:id="txtNamaObat" promptText="Contoh: Paracetamol 500mg" prefHeight="35.0" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+
+                <Label text="Kategori:" styleClass="text-label" GridPane.columnIndex="0" GridPane.rowIndex="1"/>
+                <TextField fx:id="txtKategori" promptText="Contoh: Analgetik, Antibiotik..." prefHeight="35.0" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+
+                <Label text="Jumlah Stok:" styleClass="text-label" GridPane.columnIndex="2" GridPane.rowIndex="0"/>
+                <TextField fx:id="txtStok" promptText="Contoh: 100" prefHeight="35.0" GridPane.columnIndex="3" GridPane.rowIndex="0"/>
+
+                <Label text="Satuan:" styleClass="text-label" GridPane.columnIndex="2" GridPane.rowIndex="1"/>
+                <TextField fx:id="txtSatuan" promptText="Contoh: Tablet, Strip, Kapsul, Botol" prefHeight="35.0" GridPane.columnIndex="3" GridPane.rowIndex="1"/>
+
+                <Label text="Tgl Expired:" styleClass="text-label" GridPane.columnIndex="0" GridPane.rowIndex="2"/>
+                <DatePicker fx:id="dpTglExpired" promptText="Pilih tanggal kedaluwarsa" prefHeight="35.0" maxWidth="Infinity" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+            </children>
+        </GridPane>
+
+        <HBox spacing="10.0" alignment="CENTER_LEFT" style="-fx-padding: 6 0 0 0;">
+            <Button fx:id="btnSimpan" onAction="#handleSimpanObat" text="💾 Simpan Obat Baru" styleClass="btn-success" prefHeight="35.0"/>
+            <Button fx:id="btnUpdate" onAction="#handleUpdateObat" text="✏ Perbarui Data" styleClass="btn-warning" prefHeight="35.0"/>
+            <Button fx:id="btnHapus" onAction="#handleHapusObat" text="🗑 Hapus Obat" styleClass="btn-danger" prefHeight="35.0"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Button fx:id="btnClear" onAction="#handleClearObat" text="Reset Form" styleClass="btn-outline" prefHeight="35.0"/>
+        </HBox>
+    </VBox>
+
+    <!-- Table & Search Filter Card -->
+    <VBox spacing="10.0" VBox.vgrow="ALWAYS" styleClass="card">
+        <HBox alignment="CENTER_LEFT" spacing="12.0">
+            <Label text="Katalog Obat Tersedia" styleClass="title-section"/>
+            <Region HBox.hgrow="ALWAYS"/>
+            <Label text="🔍 Cari Obat:" styleClass="text-label"/>
+            <TextField fx:id="txtSearch" prefWidth="300.0" prefHeight="35.0" promptText="Ketik Nama Obat, Kategori, atau Satuan..."/>
+        </HBox>
+
+        <TableView fx:id="tvObat" VBox.vgrow="ALWAYS">
+            <columns>
+                <TableColumn fx:id="colObatId" prefWidth="50.0" text="ID"/>
+                <TableColumn fx:id="colNamaObat" prefWidth="240.0" text="Nama Obat"/>
+                <TableColumn fx:id="colKategori" prefWidth="180.0" text="Kategori"/>
+                <TableColumn fx:id="colStok" prefWidth="90.0" text="Sisa Stok"/>
+                <TableColumn fx:id="colSatuan" prefWidth="110.0" text="Satuan"/>
+                <TableColumn fx:id="colTglExpired" prefWidth="140.0" text="Tgl Kedaluwarsa"/>
+            </columns>
+            <columnResizePolicy>
+                <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+            </columnResizePolicy>
+        </TableView>
+    </VBox>
+</VBox>
